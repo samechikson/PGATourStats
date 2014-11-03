@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PGA Tour Visualizations</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/slider.css" rel="stylesheet">
+</head>
+<style type="text/css">
+  body {
+    font: 11px sans-serif;
+  }
+
+  #graph1{
+    position: relative;
+  }
+
+  .panel{
+    font-size: 14px;
+  }
+
+  .axis{
+    fill: none;
+    stroke: #2C3540;
+  }
+
+  .d3-tip {
+  line-height: 1;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.tipName{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.tipContent{
+  font-size: 12px;
+  margin: 10px 0 0 20px;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
+
+</style>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4"> 
+        <h2>PGA Tour Stats</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9">
+        <div id="graph1"> </div>
+      </div>
+
+      <div class="col-md-3"> 
+        <div class="graphSettings">
+          <div class="btn-group">
+            <button class="btn btn-default prevYear" href="" role="button">Prev&nbsp;<span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button class="titleYear btn btn-default disabled">2014</button>
+            <button class="btn btn-default nextYear disabled" href="" role="button"><span class="glyphicon glyphicon-chevron-right"></span>&nbsp;Next
+            </button>
+          </div>
+          <h4>
+            <form class="form-inline" role="form">
+              <div class="form-group">
+                <select id="selectMetric1" class="form-control">
+                  <option value="rank" selected="selected">rank</option>
+                  <option value="money">winnings</option>
+                  <option value="events">events</option>
+                  <option value="rounds">rounds</option>
+                  <option value="age">age</option>
+                </select>
+              </div>
+              VS
+              <div class="form-group">
+                <select id="selectMetric2" class="form-control">
+                  <option value="rank">rank</option>
+                  <option value="money">winnings</option>
+                  <option value="events">events</option>
+                  <option value="rounds">rounds</option>
+                  <option value="age" selected="selected">age</option>
+                </select>
+              </div>
+            </form>
+          </h4>
+        </div><!--graphSettings-->
+        <div class="disableButtons">
+          <button class="bt-disableLine btn btn-default btn-sm btn-block"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Disable line</button>
+          <button class="bt-disablePoints btn btn-default btn-sm btn-block"><span class="glyphicon glyphicon-minus"></span>&nbsp;&nbsp;Disable points
+          </button>
+        </div>
+        <br />
+        <div class="playerInfo panel panel-default">
+        </div>
+        
+      </div>
+
+      </div>
+    </div>
+
+<!--     <div class="row">
+      <div class="col-md-1">Choose Year</div>
+      <div class="col-md-11">
+        <input type="text" id="sliderYear" value="2014" data-slider-value="2014" data-slider-handle="triangle" data-slider-min="2003" data-slider-max="2014" data-slider-step="1">
+      </div>
+    </div> -->
+
+  </div>
+</body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script src="d3.tip.js"></script> -->
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>    
+<script src="js/bootstrap.min.js"></script>   
+<script src="js/bootstrap-slider.js"></script>
+<script src="js/graph.js"></script>
