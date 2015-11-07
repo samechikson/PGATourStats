@@ -1,0 +1,14 @@
+{
+  "name": "PGATourVisualization",
+  "version": "1.0.0",
+  "description": "PGA Tour Visualization",
+  "author": "Samuel Echikson <samuel.echikson@gmail.com>",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "main": "scripts/",
+  "dependencies": {
+    "express": "latest",
+    "nodemon": "^1.8.1"
+  }
+}
