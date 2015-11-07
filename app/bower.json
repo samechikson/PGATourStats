@@ -1,0 +1,14 @@
+{
+  "name": "PGA Tour Visualization",
+  "description": "PGA Tour Visualization",
+  "dependencies": {
+    "jquery": "latest",
+    "bootstrap": "latest",
+    "bootstrap-slider": "latest",
+    "angular": "latest",
+    "fontawesome": "latest",
+    "d3": "latest",
+    "d3-tip": "latest",
+    "startbootstrap-sb-admin-2": "latest"
+  }
+}
