@@ -1,10 +1,10 @@
-$(document).ready(function(){});
+$(document).ready(function(){
 
 var lineData = [];
 var playerData = [];
 
 var margin = {top: 20, right: 20, bottom: 70, left: 100},
-    width = 900 - margin.left - margin.right,
+    width = $("#graph1").width() - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var domains = {events: [0, 40],
@@ -35,20 +35,17 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-var tip = d3.tip()
-  .attr('class', 'd3-tip')
-  .offset([-10, 0])
-  .html(function(d,i) {
-    return "<div class='tipName'><span class='caret'></span>&nbsp;&nbsp;"+ d.name + "</div>"+
-            "<div class='tipContent'>"+
-              "Rank: "+ (i+1) + 
-              "<br />Winnings: "+ d.money +
-              "<br />Events: " + d.events +
-              "<br />Rounds: " + d.rounds +
-              "<br />Age: " + d.age +
-            "</div>"
-            ;
-  });
+// var tip = d3.tip()
+//   .attr('class', 'd3-tip')
+//   .offset([-10, 0])
+//   .html(function(d,i) {
+//     return "<div class='tipName'><span class='caret'></span>&nbsp;&nbsp;"+ d.name + "</div>"+
+//             "<div class='tipContent'>"+
+//               "Rank: "+ (i+1) +
+//               "<br />Age: " + d.age +
+//             "</div>"
+//             ;
+//   });
 
 var svg = d3.select("#graph1").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -117,8 +114,8 @@ d3.json("data/PGATour2014_aggregate.json", function(data){
       .attr("r", 0)
       .attr("cx", function(d,i){ return x(d.age)})
       .attr("cy", function(d,i){ return y(d.rank)}) 
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
+//      .on('mouseover', tip.show)
+//      .on('mouseout', tip.hide)
     .transition()
       .duration(1500)
       .attr("r",3);
@@ -281,19 +278,21 @@ function changeYear(year){
 
 function fillPlayerInfo(d, playerRank){
   $(".playerInfo").html(function() {
-    return "<table class='table'><tr><th>" + playerRank + ". " + d.name + "</th></tr>" +
+    return "<a href='#'>" + playerRank + ". " + d.name +
+        "<ul class='nav nav-second-level'><li><table class='table'>" +
           "<tr><td>Age:</td><td>" + d.age + "</td></tr>" +
-          "<tr><td>Winnings:</td><td> "+ d.money + "</td></tr>" +
+          "<tr><td>Winnings:</td><td> $"+ d.money.formatMoney(2, ",", ".") + "</td></tr>" +
           "<tr><td>Made Cuts:</td><td>" + d.cuts + "/" + d.events + "</td></tr>" +
           "<tr><td>Rounds:</td><td>" + d.rounds + "</td></tr>" +
           "<tr><td>Top 10s:</td><td>" + d.top10s + "</td></tr>" +
           "<tr><td>Wins:</td><td>" + d.wins + "</td></tr>" +
-          "</table></div>";
+        "</table></li></ul></a>";
   });
+  $(".playerInfo").css("display", "inline")
 }
 
 function removePlayerInfo(){
-  $(".playerInfo").empty();
+  $(".playerInfo").css("display", "none");
   console.log("empty player info div")
 }
 
@@ -334,3 +333,15 @@ function makeLineData(data, xMetric, yMetric){
 
 }
 
+});
+
+Number.prototype.formatMoney = function(decPlaces, thouSeparator, decSeparator) {
+    var n = this,
+        decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+        decSeparator = decSeparator == undefined ? "." : decSeparator,
+        thouSeparator = thouSeparator == undefined ? "," : thouSeparator,
+        sign = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(decPlaces)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return sign + (j ? i.substr(0, j) + thouSeparator : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thouSeparator) + (decPlaces ? decSeparator + Math.abs(n - i).toFixed(decPlaces).slice(2) : "");
+};
