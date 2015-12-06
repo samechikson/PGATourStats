@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="pgaTourApp" lang="en">
 
 <head>
 
@@ -145,7 +145,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-  <div id="page-wrapper">
+  <div ng-controller="mainController" id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <h2>PGA Tour Stats</h2>
@@ -166,6 +166,7 @@
 </div>
 </body>
 
+<script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/d3/d3.min.js"></script>
 <script src="bower_components/d3-tip/index.js"></script>   
@@ -174,4 +175,4 @@
 <script src="bower_components/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js"></script>
 <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
 <!-- Custom Theme JavaScript -->
-<script src="js/graph.js"></script>
+<script src="controllers/graph.js"></script>
